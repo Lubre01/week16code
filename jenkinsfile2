@@ -6,8 +6,9 @@
     stages {
          stage('Sonarqube scan') {
             steps {
-                withsonarQubeEnv('sonarserver')
+                withsonarQubeEnv('sonarserver') {
             sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16code'
+            }
             }
         }
         stage (' all maven commands') {
