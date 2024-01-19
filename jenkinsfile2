@@ -1,22 +1,23 @@
- pipeline {
-    agent any
+pipeline {
+    agent any 
     tools {
         maven 'M2_HOME'
     }
     stages{
-         stage('Sonarqube scan'){
+        stage('sonarqube scan'){
             steps{
-                withSonarQubeEnv('sonarserver') {
-                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16code'
-               //sh 'mvn sonar:sonar'
-                }
+                withSonarQubeEnv('sonarserver'){ 
+              sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16-code'
+             // sh 'mvn sonar:sonar'
             }
-        } 
-        stage ('all maven commands'){
+            }
+        }
+        stage('all maven commands'){
             steps{
-           sh 'mvn clean test compile install package'
+                sh 'mvn clean test compile install package'
             }
-        }  
+        }
+        
        
     }
 }
