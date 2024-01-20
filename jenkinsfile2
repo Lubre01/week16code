@@ -7,7 +7,8 @@ pipeline {
         stage('sonarqube scan'){
             steps{
                 withSonarQubeEnv('sonarserver'){ 
-              sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16-code'
+              sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16code -Dsonar.organization=lubre01 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f5defa8d76a16d0930a939a0f06b1b41faa33801'
+                }
              // sh 'mvn sonar:sonar'
             }
             }
