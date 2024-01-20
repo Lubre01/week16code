@@ -8,12 +8,20 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarserver') { 
                     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16code -Dsonar.organization=lubre01 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f5defa8d76a16d0930a939a0f06b1b41faa33801'
+                // sh 'mvn sonor:sonor'
                 }
             }
         }
         stage('all maven commands') {
             steps {
                 sh 'mvn clean test compile install package'
+            }
+        }
+        stage('upload artifarct') {
+            steps {
+                sh 'curl -uadmin:AP5mZ1TGxbfJg5s8o7m1rRSRP4i -T \
+                target/bio*.jar \
+                "http://ec2-54-160-108-70.compute-1.amazonaws.com:8081/artifactory/geoapps/"'
             }
         }
     }
