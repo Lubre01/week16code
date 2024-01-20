@@ -3,22 +3,18 @@ pipeline {
     tools {
         maven 'M2_HOME'
     }
-    stages{
-        stage('sonarqube scan'){
-            steps{
-                withSonarQubeEnv('sonarserver'){ 
-              sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16code -Dsonar.organization=lubre01 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f5defa8d76a16d0930a939a0f06b1b41faa33801'
+    stages {
+        stage('sonarqube scan') {
+            steps {
+                withSonarQubeEnv('sonarserver') { 
+                    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lubre01_week16code -Dsonar.organization=lubre01 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f5defa8d76a16d0930a939a0f06b1b41faa33801'
                 }
-             // sh 'mvn sonar:sonar'
-            }
             }
         }
-        stage('all maven commands'){
-            steps{
+        stage('all maven commands') {
+            steps {
                 sh 'mvn clean test compile install package'
             }
         }
-        
-       
     }
 }
